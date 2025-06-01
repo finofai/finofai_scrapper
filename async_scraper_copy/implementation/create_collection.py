@@ -18,7 +18,7 @@ def ensure_collection(client: QdrantClient,
 
 # ———————————————— usage ————————————————
 
-client = QdrantClient(url="http://54.197.38.108:6333/")
+client = QdrantClient(url="http://44.214.8.240:6333/")
 
 # e.g. for your stock_news embeddings (768-dim, cosine similarity)
 ensure_collection(client, name="stock_news", vector_size=768, distance=Distance.COSINE)

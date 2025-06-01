@@ -17,8 +17,7 @@ RUN apt-get update && apt-get install -y \
     fonts-liberation \
   && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
   && apt install -y ./google-chrome-stable_current_amd64.deb \
-  && rm -f google-chrome-stable_current_amd64.deb \
-  && rm -rf /var/lib/apt/lists/*
+  && rm -f google-chrome-stable_current_amd64.deb
 
 ENV TZ=Asia/Kolkata
 
@@ -28,4 +27,5 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # Run the script every 6 hours in an infinite loop
-CMD ["sh", "-c", "while true; do python /app/business-standard.py; sleep 21600; done"]
+#CMD ["sh", "-c", "while true; do python /app/business-standard.py; sleep 21600; done"]
+CMD ["tail", "-f", "/dev/null"]

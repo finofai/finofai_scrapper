@@ -162,7 +162,7 @@ def sync_sector_scrape(sector,url):
 
 def main():
 
-    num_workers = min(4, cpu_count())
+    num_workers = min(1, cpu_count())
 
     with Pool(processes=num_workers) as pool:
         pool.starmap(sync_sector_scrape, FEEDS.items())

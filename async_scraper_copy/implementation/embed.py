@@ -3,7 +3,8 @@ import uuid
 from sentence_transformers import SentenceTransformer
 from qdrant_client import QdrantClient
 from qdrant_client.http import models as rest
-
+import pytz
+from datetime import datetime
 
 
 
@@ -28,6 +29,12 @@ def embed_article(id, headline, body,url):
     #uuid_made = uuid.uuid4().hex
 
     points = []
+
+    ist = pytz.timezone('Asia/Kolkata')
+
+    # Current time in IST
+    created_at = int(datetime.now(ist).timestamp())
+
     for idx, vec in enumerate(embs):
         # 3. Include the chunk’s raw text in the payload
         payload = {
@@ -35,8 +42,11 @@ def embed_article(id, headline, body,url):
             "type":       "headline" if idx == 0 else "body",
             "chunk_idx":  idx,
             "text":       texts[idx] ,
-            "url":url
+            "url":url,
+            "created_at":created_at
         }
+
+        print(payload)
 
         points.append(
             rest.PointStruct(
